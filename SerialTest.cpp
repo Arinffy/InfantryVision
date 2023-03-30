@@ -147,7 +147,7 @@ int SerialPort::Serial_Recv(uint8_t* buffer, int size)
     tcflush(fd, TCIFLUSH);//TCIFLUSH
     int temp= read(fd, buffer, size);
     if (temp != size)
-//        printf("Expect to get %d sizes of data,but got %d sizes.\n",size,temp);
+        printf("Expect to get %d sizes of data,but got %d sizes.\n",size,temp);
     for(int i=0;i<size;i++)
     {
         if(buffer[i]==0x69)

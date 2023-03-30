@@ -106,7 +106,7 @@ void serialRUpdatingThread(void)
                                  armorReceive.predict,armorReceive.bullet_v,armorReceive.gyro_pitch,armorReceive.gyro_yaw);
         //FPS
         t = (getTickCount() - t) / getTickFrequency();
-//        cout<<"wasteime_serial:"<<t*1000<<"n_serial:"<<n++<<endl;
+        cout<<"wasteime_serial:"<<t*1000<<"n_serial:"<<n++<<endl;
         //printf("FPS_serial: %f\n", 1/t);
 
         rwable_date=true;

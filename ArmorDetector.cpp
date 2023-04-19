@@ -40,7 +40,7 @@ void ArmorDetector::resetDetector()
     armors.clear();
 }
 
-Mat ArmorDetector::imgRoirect(Mat& src,iprint nt roivelocity)
+Mat ArmorDetector::imgRoirect(Mat& src,int roivelocity)
 {
 //    static int roilog=0;
 //    if(state==DetectorState::ARMOR_FOUND)

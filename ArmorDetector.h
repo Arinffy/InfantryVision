@@ -110,8 +110,7 @@ public:
     /*
      *@brief: get the vertices and type of target Armor for angle solver 将detector的结果输出
      */
-    void getTargetInfo(vector<Point2f>& armorVertices, Point2f& centerPoint, ArmorType& type);
-
+    void getTargetInfo(vector<Point2f>& lightVertices, Point2f& centerPoint, ArmorType& type);
 private:
     Mat srcImg;  //source image (current frame acquired from camera) 从相机采集的当前的图像帧
     Mat srcImg_pre;  //source image (current frame acquired from camera) 从相机采集的当前的图像帧

@@ -40,7 +40,7 @@ void ArmorDetector::resetDetector()
     armors.clear();
 }
 
-Mat ArmorDetector::imgRoirect(Mat& src,int roivelocity)
+Mat ArmorDetector::imgRoirect(Mat& src,iprint nt roivelocity)
 {
 //    static int roilog=0;
 //    if(state==DetectorState::ARMOR_FOUND)
@@ -584,7 +584,38 @@ void ArmorDetector::showDebugInfo(bool showSrcImg_ON, bool showSrcBinary_ON, boo
 void ArmorDetector::getTargetInfo(vector<Point2f>& lightVertices, Point2f& centerPoint, ArmorType& type)
 {
     lightVertices.clear();
-    lightVertices = targetArmor.lightVertices;
-    centerPoint = targetArmor.center;
-    type = targetArmor.type;
+    //set traker
+    static int detecter_counter=0;设置检测计数器，记录稳定检测次数
+    static int tracker_counter=0;
+    if(targetArmroTemp.armorNum==0) 
+        targetArmroTemp=targetArmor;//Set Traker
+    else if(targetArmroTemp.armorNum==targetArmor.armorNum)
+    {
+        targetArmroTemp = targetArmor;//Update Traker
+        detecter_counter++;
+    }
+    else if(targetArmroTemp.armorNum!=targetArmor.armorNum)
+    {
+        if(detecter_counter>30)//稳定检测次数超过30，开启5帧追踪器，允许5次检测偏差
+        {
+            tracker_counter++;// record numbers
+            if(tracker_counter > 5)// No records detected 5times,reloading records
+            {
+                targetArmroTemp = targetArmor;//Update Traker
+                tracker_counter = 0;
+                detecter_counter = 0;//重新开启稳定检测
+            }
+            else targetArmroTemp = targetArmroLastTemp;//Update Traker
+        } 
+        else{
+            targetArmroTemp = targetArmor;//Update Traker|未达到稳定检测次数，直接赋值新装甲板
+            detecter_counter = 0;//重新开启稳定检测
+        }
+    }
+    else print("error traker,please set again");
+    
+    targetArmroLastTemp = targetArmroTemp;//record history
+    lightVertices = targetArmroTemp.lightVertices;
+    centerPoint = targetArmroTemp.center;
+    type = targetArmroTemp.type;
 }
